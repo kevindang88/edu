@@ -1,0 +1,9 @@
+1. awk -F: '{print $2}' database
+2. awk -F: '/Dan/ {print $2}' database
+3. awk -F: '/Susan/ {print $1 " " $2}' database
+4. awk '/^[[:alpha:]]* D/ {print $2}' database
+5. awk '/^[CE]/ {print $1}' database
+6. awk '/^([[:alpha:]]){4} / {print $1}' database
+7. awk '/\(916\)/ {print $1}' database
+8. awk -F: '/Mike/ {printf("$%d $%d $%d\n", $3, $4, $5)}' database
+9. awk -F:"[ :]" '{print $2 ", " $1}' database

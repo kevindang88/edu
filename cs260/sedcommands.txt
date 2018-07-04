@@ -1,0 +1,10 @@
+1. sed 's/Jon/Jonathan/' datebook
+2. sed 1,3d datebook
+3. sed -n 5,10p datebook
+4. sed '/Lane/d' datebook
+5. sed -n '/:12\//p' datebook
+6. sed '/^Fred/a\***' datebook 
+7. sed '/Jose/c\JOSE HAS RETIRED' datebook
+8. sed '/Popeye/s/[0-9]*\/[0-9]*\/[0-9]*/11\/14\/46/' datebook
+9. sed '/\-836\-/s/ //g' datebook 
+10. (script submitted as separate file)
