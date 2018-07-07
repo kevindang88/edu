@@ -1,8 +1,9 @@
+#!/bin/sh
 echo -e "Enter a number: \c"
 read number
-if expr $number % 2 = 0 > /dev/null 2>&1
+if [ `expr $number % 2` -eq 0 ]
 then
-  echo The number is even
+  echo "even"
 else
-  echo The number is odd
+  echo "odd"
 fi
