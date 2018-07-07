@@ -13,13 +13,13 @@ ENDOFMENU
   read reply
   echo
   case $reply in
-    "1")
+    1)
       date
       ;;
-     "2"|"3")
+     2|3)
        pwd
        ;;
-     "4")
+     4)
        stop=1
        ;;
      *)
