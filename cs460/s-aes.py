@@ -58,16 +58,51 @@ def generateSubkeys(key):
     keys = [K0, K1, K2]
     return keys
 
+# nibble substitution (s-boxes), assuming c is 16 bits
+def substitute(c):
+    return sbox(c[:4]) + sbox(c[4:8]) + sbox(c[8:-4]) + sbox(c[-4:]) 
+
+# swap 2nd nibble and 4th nibble, assuming c is 16 bits
+def shiftRows(c):
+    return c[:4] + c[-4:] + c[8:-4] + c[4:8]
+
+# apply matrix multiplication using the constant matrix
+def mixColumns(s):
+    s_00 = s[:4]
+    s_10 = s[4:8]
+    s_01 = s[8:-4]
+    s_11 = s[-4:]
+    s_00p = xor(s_00, MULT4[int(s_10, 2)]) 
+    s_10p = xor(MULT4[int(s_00, 2)] , s_10)
+    s_01p = xor(s_01, MULT4[int(s_11, 2)])
+    s_11p = xor(MULT4[int(s_01, 2)], s_11)
+    return s_00p + s_10p + s_01p + s_11p
+
 # program begins here
 def main():
-    # key = input("Enter 16-bit key: ")
-    # plaintext = input("Enter 16-bit plaintext: ")
-    # TODO hard-coded test values:
-    
+    # hard-code test values:
+    # plaintext = '1101011100101000'
+    # key = '0100101011110101'
+    plaintext = input("Enter 16-bit plaintext: ")
+    key = input("Enter 16-bit key: ")
+
+    # Generate subkeys
     K0, K1, K2 = generateSubkeys(key)
-    cipher = xor(plaintext, K0) # Round 0
-    print("".join(cipher))
-    
+
+    # Encryption: Round 0
+    cipher = xor(plaintext, K0) # add Round 0 key
+
+    # Round 1
+    cipher = substitute(cipher)
+    cipher = shiftRows(cipher)
+    cipher = mixColumns(cipher)
+    cipher = xor(cipher, K1) # add Round 1 Key
+
+    # Final Round
+    cipher = substitute(cipher)
+    cipher = shiftRows(cipher) 
+    ciphertext = xor(cipher, K2) # add Round 2 key
+    print("ciphertext:", "".join(ciphertext))
 
 main()
 
