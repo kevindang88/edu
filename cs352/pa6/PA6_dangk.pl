@@ -81,16 +81,16 @@ smart(X) :- likes(X,book).
 valuable(X) :- likes(mary,X).
 
 /* Part 2(b) output:
-* ?- happy(X).
-* X = bill .
-* ?- likes(X,book).
-* X = john .
-* ?- smart(X).
-* X = john .
-* ?- valuable(X).
-* X = book .
-* ?- happy(X), sad(X).
-* X = bill .
-* ?- happy(X), likes(X, book).
-* X = mary .
+* ?- findall(X, happy(X), L).
+* L = [bill, mary, john, alex].
+* ?- findall(X, likes(X, book), L).
+* L = [john, mary].
+* ?- findall(X, smart(X), L).
+* L = [john, mary].
+* ?- findall(X, valuable(X), L).
+* L = [book, corvettes].
+* ?- findall(X, (happy(X),sad(X)), L).
+* L = [bill].
+* ?- findall(X, (happy(X),likes(X,book)), L).
+* L = [mary, john].
 */
