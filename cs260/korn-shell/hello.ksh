@@ -1,0 +1,4 @@
+sayhello ()
+{
+  echo hello
+}
