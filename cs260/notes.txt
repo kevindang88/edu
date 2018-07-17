@@ -1,0 +1,13 @@
+Can't use functions in csh, the only upside is that I can just manipulate the 
+values of SAVINGS and CHECKING instead of passing them around as parameters.
+I could try to write multiple scripts and have the main script call them
+like functions, but passing variables and returning them is extremely
+inelegant.
+
+I can basically treat ksh and bash like procedural programming
+languages. Encapsulate everything in functions.
+
+Aliases in csh don't update their variable values???
+Values are the same as they were when the alias was set.
+
+csh - Huge switch cases because of lack of functions

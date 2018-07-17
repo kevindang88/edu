@@ -30,7 +30,6 @@ initial_prompt() {
 }
 
 display_menu() {
-  valid=0
   while (( 1 )); do
     clear
     echo "*** Welcome to Cal Poly's ATM System ***"
@@ -110,6 +109,7 @@ transfer() {
 }
 
 withdraw() {
+  clear
   echo "*** WITHDRAWAL ***"
   show_balances
   PS3="==> Please select option (1-3): "

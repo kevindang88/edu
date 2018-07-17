@@ -1,0 +1,5 @@
+set SAVINGS=1000
+set CHECKING=1000
+
+setenv HELLO 5
+echo $HELLO
