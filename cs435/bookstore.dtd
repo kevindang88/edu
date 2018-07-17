@@ -1,0 +1,15 @@
+<!DOCTYPE bookstore [
+  <!ELEMENT bookstore (book)*>
+
+  <!ELEMENT book (title, price, year)>
+  <!ATTLIST book category NMTOKEN #REQUIRED>
+
+  <!ELEMENT title (#PCDATA, author+)>
+  <!ATTLIST title lang NMTOKEN #REQUIRED>
+
+  <!ELEMENT author (#PCDATA)>
+
+  <!ELEMENT price (#PCDATA)>
+
+  <!ELEMENT year (#PCDATA)>
+]>
