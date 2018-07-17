@@ -9,7 +9,8 @@ set CHECKING=1000
 # Using aliases for single-line commands
 # Must escape <, >, (, ) characters from strings
 alias prompt_continue echo "\<Press Enter to continue\>"
-alias prompt_select6 echo "==\> Please select option \(1-6\): "
+alias prompt_select6 echo -n "==\> Please select option \(1-6\): "
+alias prompt_select3 echo -n "==\> Please select option \(1-3\): "
 #alias show_savings echo Savings account balance: $ $SAVINGS.00
 #alias show_checking echo Checking account balance: $ $CHECKING.00
 #alias show_balances "show_savings; show_checking"
@@ -51,6 +52,7 @@ while ( 1 )
   (5) Withdraw Cash from either account
   (6) Exit
 ENDOFMENU
+  prompt_select6
   set reply = $<
   switch ($reply)
     case "1":
@@ -60,13 +62,13 @@ ENDOFMENU
       set amount = $<
       if ($amount > $CHECKING) then
         echo "Insufficient funds. Transaction not completed."
-        echo "Checking account balance: $CHECKING"
+        echo Checking account balance: \$$CHECKING.00
       else
           @ CHECKING -= $amount
           @ SAVINGS += $amount
           echo "Transaction complete."
-          echo Checking account balance:  \$$CHECKING
-          echo Savings account balance:  \$$SAVINGS
+          echo Checking account balance:  \$$CHECKING.00
+          echo Savings account balance:  \$$SAVINGS.00
       endif
       prompt_continue
       set c = $<
@@ -78,30 +80,72 @@ ENDOFMENU
       set amount = $<
       if ($amount > $SAVINGS) then
         echo "Insufficient funds. Transaction not completed."
-        echo "Savings account balance: $SAVINGS"
+        echo Savings account balance: \$$SAVINGS.00
       else
           @ SAVINGS -= $amount
           @ CHECKING += $amount
           echo "Transaction complete."
-          echo Savings account balance:  \$$SAVINGS
-          echo Checking account balance:  \$$CHECKING
+          echo Savings account balance:  \$$SAVINGS.00
+          echo Checking account balance:  \$$CHECKING.00
       endif
       prompt_continue
       set c = $<
       breaksw
     case "3":
-      echo Savings account balance \$$SAVINGS
+      echo Savings account balance \$$SAVINGS.00
       prompt_continue
       set c = $<
       breaksw
     case "4":
-      echo Checking account balance \$$CHECKING
+      echo Checking account balance \$$CHECKING.00
       prompt_continue
       set c = $<
       breaksw
     case "5":
       clear
-      
+      echo "*** WITHDRAWAL ***"
+      echo Savings account balance: \$$SAVINGS.00
+      echo Checking account balance: \$$CHECKING.00
+      cat << ENDOFMENU
+(1) Savings
+(2) Checking
+(3) Quit
+ENDOFMENU
+      prompt_select3
+      set reply = $<
+      switch ($reply)
+        case "1":
+          echo "*** WITHDRAW FROM SAVINGS ***"
+          echo Savings account balance: \$$SAVINGS.00
+          echo -n "Enter the amount you wish to withdraw: "
+          set amount = $<
+          if ($amount > $SAVINGS) then 
+            echo "Insufficient funds. Transaction not completed."
+          else
+            @ SAVINGS -= $amount
+            echo "Transaction complete."
+          endif
+          prompt_continue
+          set c = $<
+          breaksw
+        case "2":
+          echo "*** WITHDRAW FROM CHECKING ***"
+          echo Checking account balance: \$$CHECKING.00
+          echo -n "Enter the amount you wish to withdraw: "
+          set amount = $<
+          if ($amount > $CHECKING) then
+            echo "Insufficient funds. Transaction not completed."
+          else
+            @ CHECKING -= $amount
+            echo "Transaction complete."
+          endif
+          prompt_continue
+          set c = $<
+          breaksw
+        # case 3 and invalid input return to main menu
+        default:
+          breaksw
+      endsw
       breaksw
     case "6":
       echo "Thank you for using the ATM system."
@@ -109,7 +153,4 @@ ENDOFMENU
       breaksw
   endsw
 end
-
-
-
 
