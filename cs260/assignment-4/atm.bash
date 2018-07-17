@@ -14,7 +14,7 @@ initial_prompt() {
   valid=0
   failed_attempts=0
   while (( valid != 1 )); do
-    echo -e "Please enter your PIN: \c"
+    echo -n "Please enter your PIN: "
     read PIN
     if (( $PIN == 111 )); then
       valid=1
@@ -93,7 +93,7 @@ transfer() {
   show_balances
   src=$1; dst=$2
   eval src_balance=\$$src; eval dst_balance=\$$dst
-  echo -e "Enter the amount you wish to transfer: \c"
+  echo -n "Enter the amount you wish to transfer: "
   read amount
   if (( $amount > $src_balance )); then
     echo "Insufficient funds. Transaction not completed."
@@ -129,7 +129,7 @@ withdraw() {
   done
   echo "*** WITHDRAW FROM $account ***"
   eval balance=\$$account
-  echo -e "Enter the amount you wish to withdraw: \c"
+  echo -n "Enter the amount you wish to withdraw: "
   read amount
   if (( $amount > $balance )); then
     echo "Insufficient funds. Transaction not completed."
