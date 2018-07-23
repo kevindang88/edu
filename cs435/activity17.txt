@@ -1,0 +1,24 @@
+ca al lp po ol ly yp om mo on na
+
+(11 unique bigrams)
+
+ca al li if fo or rn ni ia 
+as 
+st ta at te 
+ep 
+po ol ly 
+yt 
+te ec ch hn ic
+cu 
+un iv ve er rs si it ty 
+yp 
+om mo on na
+(37 unique bigrams)
+
+Number of unique shared bigrams: 10
+[ca, al, po, ol, ly, yp, om, mo, on, na]
+
+S = 2C/(A + B)
+S = 2(10)(11 + 37)
+
+S = 0.416

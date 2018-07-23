@@ -1,3 +1,2 @@
-likes(john, food).
-likes(mary, food).
-likes(mary, books).
+[a,b,c,d,e,f,g].
+[apple, pear, bananas, breadfruit].

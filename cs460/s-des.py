@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from collections import deque # for rotate() function in left_shift()
 
 P10 = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
